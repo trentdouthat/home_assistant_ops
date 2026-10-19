@@ -1,0 +1,17 @@
+log:
+  level: debug
+  hass: info
+api:
+  listen: ''
+srtp:
+  listen: ''
+rtsp:
+  listen: ':8554'
+  default_query: video&audio=aac&audio=opus
+webrtc:
+  listen: ''
+streams:
+  c8df8458ee15_live: exec:/app/ring-mqtt/scripts/start-stream.sh c8df8458ee15 live ring/ac60ca5e-5ac7-4e7b-a83c-226ce33e2dc2/camera/c8df8458ee15 {output}#killsignal=15
+  c8df8458ee15_event: exec:/app/ring-mqtt/scripts/start-stream.sh c8df8458ee15 event ring/ac60ca5e-5ac7-4e7b-a83c-226ce33e2dc2/camera/c8df8458ee15 {output}#killsignal=15
+  c8df8458b785_live: exec:/app/ring-mqtt/scripts/start-stream.sh c8df8458b785 live ring/ac60ca5e-5ac7-4e7b-a83c-226ce33e2dc2/camera/c8df8458b785 {output}#killsignal=15
+  c8df8458b785_event: exec:/app/ring-mqtt/scripts/start-stream.sh c8df8458b785 event ring/ac60ca5e-5ac7-4e7b-a83c-226ce33e2dc2/camera/c8df8458b785 {output}#killsignal=15

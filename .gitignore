@@ -1,0 +1,8 @@
+config/home-assistant_v2.db*
+config/.storage/
+config/secrets.yaml
+config/*.log
+config/backups/
+config/nest.event_media/
+*.log
+.env

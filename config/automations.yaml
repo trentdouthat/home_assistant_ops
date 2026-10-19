@@ -1,0 +1,69 @@
+- id: '1779290693870'
+  alias: 'System: Front Doorbell Announcement'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.front_door_ding
+    to:
+    - 'on'
+  conditions: []
+  actions:
+  - action: notify.alexa_media_trent_s_echo
+    data:
+      message: Attention. Someone is at the front door.
+      title: Front Door - Echo announcement
+      data:
+        text: tts
+  - action: notify.alexa_media_trent_s_echo_show
+    data:
+      message: Attention. Someone is at the front door.
+      title: Front Door - Echo Show
+      data:
+        text: tts
+  mode: single
+- id: '1779293438528'
+  alias: 'System: Side Doorbell Announcement'
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.side_door_ding
+    to:
+    - 'on'
+  conditions: []
+  actions:
+  - action: notify.alexa_media_trent_s_echo
+    data:
+      message: Attention. Someone is at the side door.
+      data:
+        text: tts
+  - action: notify.alexa_media_trent_s_echo_show
+    data:
+      message: Attention. Someone is at the side door.
+      data:
+        text: tts
+  mode: single
+- id: '1789682997406'
+  alias: Who_is_here
+  description: ''
+  triggers:
+  - type: turned_on
+    device_id: 6db6cc8a65f55bdace8ecace000ed366
+    entity_id: ed7642fa24c619bb82a12faf416e07aa
+    domain: switch
+    trigger: device
+    for:
+      hours: 0
+      minutes: 1
+      seconds: 0
+  conditions: []
+  actions:
+  - action: camera.snapshot
+    metadata: {}
+    target:
+      entity_id: camera.front_door_snapshot
+    data:
+      filename: /config/www/snapshots/front_door_{{ now().strftime('%Y%m%d_%H%M%S')
+        }}.jpg
+  mode: single

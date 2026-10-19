@@ -1,0 +1,35 @@
+---
+- name: Provision and Deploy Home Assistant
+  hosts: localhost
+  become: true
+  vars:
+    project_dir: "/mnt/AI_Workspace/home_assistant_ops"
+
+  tasks:
+    - name: Ensure Docker and Compose plugins are installed
+      dnf:
+        name: 
+          - docker
+          - docker-compose
+        state: present
+
+    - name: Ensure Docker daemon is enabled and running
+      systemd:
+        name: docker
+        state: started
+        enabled: true
+
+    - name: Provision persistent configuration directory
+      file:
+        path: "{{ project_dir }}/config"
+        state: directory
+        mode: '0755'
+        owner: trentdouthat
+        group: trentdouthat
+
+    - name: Deploy Home Assistant container stack
+      command: docker-compose up -d
+      args:
+        chdir: "{{ project_dir }}"
+      register: compose_output
+      changed_when: "'Created' in compose_output.stdout or 'Started' in compose_output.stdout"
